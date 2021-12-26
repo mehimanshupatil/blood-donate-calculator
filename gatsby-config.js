@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/blood-donate-calculator',
   siteMetadata: {
     siteUrl: 'https://himanshupatil.dev',
     title: 'Blood Donation Calculator',
