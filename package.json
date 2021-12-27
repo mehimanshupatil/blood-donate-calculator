@@ -4,6 +4,7 @@
   "description": "Blood Donation Calculator",
   "private": true,
   "author": "Himanshu Patil",
+  "homepage": "https://mehimanshupatil.github.io/blood-donate-calculator",
   "repository": {
     "type": "git",
     "url": "https://github.com/mehimanshupatil/blood-donate-calculator.git"
