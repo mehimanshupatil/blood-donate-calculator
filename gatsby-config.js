@@ -16,6 +16,12 @@ module.exports = {
       resolve: 'gatsby-plugin-manifest',
       options: {
         icon: 'src/images/icon.png',
+        name: `Blood Donation Calculator`,
+        short_name: `Blood Donation Calculator`,
+        start_url: `/`,
+        background_color: `#f7f0eb`,
+        theme_color: `#e6322f`,
+        display: `standalone`,
       },
     },
     'gatsby-plugin-sharp',
@@ -29,5 +35,8 @@ module.exports = {
       __key: 'images',
     },
     `gatsby-plugin-typescript`,
+    {
+      resolve: `gatsby-plugin-offline`,
+    },
   ],
 };

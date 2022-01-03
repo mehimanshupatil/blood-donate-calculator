@@ -45,23 +45,31 @@ main {
       }
     }
   }
-  .commonResult {
-    padding: 1.5rem;
-    margin: 0 1rem;
-    color: white;
-    border-radius: 0.4rem;
-    font-size: 1.5rem;
-    &.success {
-      background-color: #00800080;
-      border: 1px solid #008000;
+  .resultContainer {
+    display: flex;
+    flex-direction: column;
+    .commonResult {
+      padding: 1.5rem;
+      margin: 0 1rem;
+      color: white;
+      border-radius: 0.4rem;
+      font-size: 1.5rem;
+      &.success {
+        background-color: #00800080;
+        border: 1px solid #008000;
+      }
+      &.error {
+        background-color: #ff604f;
+        border: 1px solid #ff0000;
+      }
     }
-    &.error {
-      background-color: #ff604f;
-      border: 1px solid #ff0000;
+    .moreInfo {
+      text-align: center;
+      font-size: 10px;
     }
-  }
-  .moreInfo {
-    text-align: center;
-    font-size: 10px;
+    .remainderBtn {
+      margin: auto;
+      margin-top: 12px;
+    }
   }
 }

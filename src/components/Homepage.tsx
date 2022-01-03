@@ -12,7 +12,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@mui/material/Button';
 import Grow from '@mui/material/Grow';
 import classNames from 'classnames/bind';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs'; // @ts-ignore
+import logo from '../images/icon.png';
 
 export const Homepage = () => {
   const [date, setDate] = React.useState<dayjs.Dayjs | null>(null);
@@ -29,12 +30,36 @@ export const Homepage = () => {
 
   const submit = () => {
     const monthToAdd = gender === 'male' ? 3 : 4;
-    const _date = date.add(monthToAdd, 'month');
+    const _date = date?.add(monthToAdd, 'month');
+    if (!_date) return;
     setNewDate(_date);
     setIsFuture(dayjs().isAfter(_date));
     setTimeout(() => {
       window.scroll({ behavior: 'smooth', top: document.body.scrollHeight });
     }, 0);
+  };
+
+  const sendNotify = async () => {
+    const reg = await navigator.serviceWorker.getRegistration();
+    console.log(`reg`, reg);
+    if (!reg) return;
+    Notification.requestPermission().then((permission) => {
+      if (permission !== 'granted') {
+        alert('you need to allow push notifications');
+      } else {
+        const timestamp = new Date().getTime() + 20000; // now plus 5000ms
+        reg.showNotification('Demo Push Notification', {
+          tag: timestamp.toString(), // a unique ID
+          body: 'horray', // content of the push notification
+          timestamp: timestamp, // set the time for the push notification
+          data: {
+            url: window.location.href, // pass the current url to the notification
+          },
+          badge: logo,
+          icon: logo,
+        });
+      }
+    });
   };
 
   return (
@@ -85,6 +110,7 @@ export const Homepage = () => {
         in={Boolean(newDate)}
         style={{ transformOrigin: '0 0 0' }}
         {...(newDate ? { timeout: 1000 } : {})}
+        className={styles.resultContainer}
       >
         <div>
           {newDate && (
@@ -114,6 +140,11 @@ export const Homepage = () => {
                   more info
                 </a>
               </div>
+              {isFuture && (
+                <Button variant='contained' onClick={sendNotify} className={styles.remainderBtn}>
+                  send remainder or{' '}
+                </Button>
+              )}
             </>
           )}
         </div>
